@@ -1,0 +1,77 @@
+<h2>Template: <small>Basics</small></h2>
+<hr>
+<div class="row">
+  <div class="col">
+
+    <form (ngSubmit)="save()" #myForm="ngForm" autocomplete="off">
+
+      <!-- Product Field -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Product</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" placeholder="Product name" [ngModel] = 'initForm.product'
+                 name="product" required minlength="3">
+          <span class="form-text text-danger"
+                *ngIf="invalidName()">
+            Must be 3 letter long
+          </span>
+        </div>
+      </div>
+
+      <!-- Price Field -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Price</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control" placeholder="Product price"
+                 name="price" required min="0" [ngModel] = 'initForm.price'>
+          <span class="form-text text-danger"
+                *ngIf="invalidPrice()">
+            Must be 0 or bigger
+          </span>
+        </div>
+      </div>
+
+      <!-- Stocks Field -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Stock</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control" placeholder="Product stocks" [ngModel] = 'initForm.stock' name="stock"
+                 customMin [minimum]="0" required>
+        </div>
+      </div>
+
+      <!-- Save button -->
+      <div class="row">
+        <div class="col">
+          <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary float-end">
+            Save
+          </button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col">
+
+    <span>Valid</span>
+    <pre>{{myForm.valid}}</pre>
+
+    <span>Pristine</span>
+    <pre>{{myForm.pristine}}</pre>
+
+    <span>Touched</span>
+    <pre>{{myForm.touched}}</pre>
+
+    <span>Value</span>
+    <pre>{{myForm.value | json}}</pre>
+
+    <span>CustomDirective</span>
+    <pre>{{myForm.controls.stock?.errors | json}}</pre>
+
+  </div>
+</div>
